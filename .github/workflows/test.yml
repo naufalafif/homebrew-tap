@@ -1,0 +1,28 @@
+name: Test Cask
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Validate cask install
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cask
+        run: brew install --cask ./Casks/agent-guard.rb
+
+      - name: Check .app bundle exists
+        run: test -d /Applications/AgentGuard.app
+
+      - name: Check binary exists
+        run: test -f /Applications/AgentGuard.app/Contents/MacOS/AgentGuard
+
+      - name: Check icon exists
+        run: test -f /Applications/AgentGuard.app/Contents/Resources/AppIcon.icns
+
+      - name: Uninstall
+        run: brew uninstall --cask agent-guard
