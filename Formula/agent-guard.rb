@@ -11,22 +11,25 @@ class AgentGuard < Formula
   def install
     system "swift", "build", "-c", "release", "--disable-sandbox"
 
-    # Create .app bundle
+    # Create .app bundle with icon
     app_contents = prefix/"AgentGuard.app/Contents"
     (app_contents/"MacOS").mkpath
+    (app_contents/"Resources").mkpath
     (app_contents/"MacOS").install ".build/release/AgentGuard"
     app_contents.install "Info.plist"
+    (app_contents/"Resources").install "AppIcon.icns"
 
     # Ad-hoc sign
     system "codesign", "--force", "--sign", "-", prefix/"AgentGuard.app"
   end
 
   def post_install
+    # Scanners are best-effort — the app auto-installs on first launch if missing
     ohai "Installing mcp-scanner..."
-    system "uv", "tool", "install", "cisco-ai-mcp-scanner"
+    system "uv", "tool", "install", "--force", "cisco-ai-mcp-scanner" rescue nil
 
     ohai "Installing skill-scanner..."
-    system "uv", "tool", "install", "cisco-ai-skill-scanner"
+    system "uv", "tool", "install", "--force", "cisco-ai-skill-scanner" rescue nil
 
     # Initialize config and cache dirs
     config_dir = Pathname.new(Dir.home)/".config/mcp-scan"
@@ -47,16 +50,15 @@ class AgentGuard < Formula
       To start AgentGuard:
         open #{prefix}/AgentGuard.app
 
-      To launch at login:
-        Add AgentGuard.app in System Settings > General > Login Items
+      Or search "AgentGuard" in Spotlight.
 
-      To uninstall scanners:
-        uv tool uninstall cisco-ai-mcp-scanner
-        uv tool uninstall cisco-ai-skill-scanner
+      To launch at login:
+        Open AgentGuard > Settings > Launch at login
     EOS
   end
 
   test do
     assert_predicate prefix/"AgentGuard.app/Contents/MacOS/AgentGuard", :exist?
+    assert_predicate prefix/"AgentGuard.app/Contents/Resources/AppIcon.icns", :exist?
   end
 end
