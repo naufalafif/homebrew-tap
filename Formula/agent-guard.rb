@@ -1,8 +1,8 @@
 class AgentGuard < Formula
   desc "macOS menu bar security scanner for MCP servers and AI agent skills"
   homepage "https://github.com/naufalafif/agent-guard"
-  url "https://github.com/naufalafif/agent-guard/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "d4679bb627de218d916a9d401b1e5566ab8a7507a63543e29f302cc592d41f28"
+  url "https://github.com/naufalafif/agent-guard/archive/refs/tags/v1.1.0.tar.gz"
+  sha256 "8fd8049cb3a3ecee217036432080eb9737225673fc64fb077555ffeb30b96912"
   license "MIT"
 
   depends_on :macos
