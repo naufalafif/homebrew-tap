@@ -1,6 +1,6 @@
 cask "agent-guard" do
   version "1.2.0"
-  sha256 "839ab559d820e98a407b296f64ec25889cbc33e97df4452828a2f827004057d9"
+  sha256 "4542adfa07510c60c377ff21c7ae19618d35ea8d1f19cda8da27861af298347d"
 
   url "https://github.com/naufalafif/agent-guard/releases/download/v#{version}/AgentGuard.zip"
   name "AgentGuard"
