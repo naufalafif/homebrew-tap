@@ -12,17 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Tap from local checkout
+        run: |
+          mkdir -p "$(brew --repository)/Library/Taps/naufalafif"
+          ln -s "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/naufalafif/homebrew-tap"
+
       - name: Install cask
-        run: brew install --cask ./Casks/agent-guard.rb
+        run: HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask naufalafif/tap/agent-guard
 
-      - name: Check .app bundle exists
-        run: test -d /Applications/AgentGuard.app
-
-      - name: Check binary exists
-        run: test -f /Applications/AgentGuard.app/Contents/MacOS/AgentGuard
-
-      - name: Check icon exists
-        run: test -f /Applications/AgentGuard.app/Contents/Resources/AppIcon.icns
+      - name: Verify app bundle
+        run: |
+          test -d /Applications/AgentGuard.app
+          test -f /Applications/AgentGuard.app/Contents/MacOS/AgentGuard
+          test -f /Applications/AgentGuard.app/Contents/Resources/AppIcon.icns
+          echo "All checks passed"
 
       - name: Uninstall
         run: brew uninstall --cask agent-guard
