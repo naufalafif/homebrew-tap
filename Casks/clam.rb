@@ -1,18 +1,11 @@
 cask "clam" do
-  version "1.0.0"
-  sha256 "9d91bf5c68d1de9910bd52327bd13c9822e8d864d518f4e424bf8a12c0c493ef"
+  version "1.1.0"
+  sha256 "6baf3e2df1c3aace4796ccbf7d6ac59540d2a3f83817143def03d8a8b21dc773"
 
-  url "https://github.com/naufalafif/clam/releases/download/v#{version}/Clam.zip"
+  url "https://github.com/naufalafif/clam/releases/download/v1.1.0/Clam.zip"
   name "Clam"
-  desc "Claude session manager for your macOS menu bar"
+  desc "Native macOS menu bar app for managing Claude Code sessions"
   homepage "https://github.com/naufalafif/clam"
 
-  depends_on macos: ">= :ventura"
-
   app "Clam.app"
-
-  zap trash: [
-    "~/Library/Preferences/com.naufal.clam.plist",
-    "~/.cache/clam",
-  ]
 end
