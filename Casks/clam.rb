@@ -11,11 +11,6 @@ cask "clam" do
 
   app "Clam.app"
 
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-cr", "#{appdir}/Clam.app"]
-  end
-
   zap trash: [
     "~/Library/Preferences/com.naufal.clam.plist",
     "~/.cache/clam",
