@@ -1,8 +1,8 @@
 class Mmsso < Formula
   desc "Use mmctl with SSO — no Personal Access Token needed"
   homepage "https://github.com/naufalafif/mmsso"
-  url "https://github.com/naufalafif/mmsso/archive/refs/tags/v0.4.0.tar.gz"
-  sha256 "aa218bf63e143a92c562fd3c5ff758874be519a8dbdd70c843ff891321985329"
+  url "https://github.com/naufalafif/mmsso/archive/refs/tags/v0.5.0.tar.gz"
+  sha256 "620ff5b9c56fdc316f228dfda25ba260284417f4619567feaca3bcc5902e2349"
   license "MIT"
 
   depends_on :macos
